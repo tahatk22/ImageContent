@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "5k4LQtQehy+pvwho05AOiOS+GmLImilN+sKb1pBO9mwmzCSwTj1d45Om3hRDyTBWBKPKSGWhzGxTKLfckT+3rg==",
+  "success": true,
+  "projectFilePath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\M.C.C\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
+    "C:\\Users\\M.C.C\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\M.C.C\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
+    "C:\\Users\\M.C.C\\.nuget\\packages\\ulid\\1.3.4\\ulid.1.3.4.nupkg.sha512"
+  ],
+  "logs": []
+}
