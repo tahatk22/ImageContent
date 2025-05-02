@@ -888,11 +888,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj",
+      "projectUniqueName": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj",
       "projectName": "ImageContent.DAL",
-      "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj",
+      "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj",
       "packagesPath": "C:\\Users\\M.C.C\\.nuget\\packages\\",
-      "outputPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.DAL\\obj\\",
+      "outputPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\M.C.C\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -909,11 +909,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj": {
-              "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj"
+            "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj": {
+              "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj"
             },
-            "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj": {
-              "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj"
+            "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj": {
+              "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj"
             }
           }
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj": {}
+    "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj": {
+    "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj",
+        "projectUniqueName": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj",
         "projectName": "ImageContent.Common",
-        "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj",
+        "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj",
         "packagesPath": "C:\\Users\\M.C.C\\.nuget\\packages\\",
-        "outputPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\obj\\",
+        "outputPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\M.C.C\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -74,14 +74,14 @@
         }
       }
     },
-    "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj": {
+    "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj",
+        "projectUniqueName": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj",
         "projectName": "ImageContent.Domain",
-        "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj",
+        "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj",
         "packagesPath": "C:\\Users\\M.C.C\\.nuget\\packages\\",
-        "outputPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\obj\\",
+        "outputPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\M.C.C\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -98,8 +98,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj": {
-                "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj"
+              "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj": {
+                "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Common\\ImageContent.Common.csproj"
               }
             }
           }

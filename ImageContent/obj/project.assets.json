@@ -3074,11 +3074,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Clean Architecture Project\\ImageContent\\ImageContent\\ImageContent.csproj",
+      "projectUniqueName": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent\\ImageContent.csproj",
       "projectName": "ImageContent",
-      "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent\\ImageContent.csproj",
+      "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent\\ImageContent.csproj",
       "packagesPath": "C:\\Users\\M.C.C\\.nuget\\packages\\",
-      "outputPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent\\obj\\",
+      "outputPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\M.C.C\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3095,14 +3095,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Clean Architecture Project\\ImageContent\\ImageContent.BL\\ImageContent.BL.csproj": {
-              "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.BL\\ImageContent.BL.csproj"
+            "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.BL\\ImageContent.BL.csproj": {
+              "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.BL\\ImageContent.BL.csproj"
             },
-            "D:\\Clean Architecture Project\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj": {
-              "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj"
+            "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj": {
+              "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.DAL\\ImageContent.DAL.csproj"
             },
-            "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj": {
-              "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj"
+            "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj": {
+              "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj"
             }
           }
         }

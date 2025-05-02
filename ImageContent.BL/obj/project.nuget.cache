@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yzB3n+Z06PUVesrMP951TUt0sWsmAeDM9AwXrvsI3VTRtGDOdzw3xUGbp3zf3QMYoi0gZbxDahCsew9nkXomAQ==",
+  "dgSpecHash": "Ve6HoVYWCdbRlbd2FNV4Q6ExuUuytmcMeQ0sReXjmw49NyjnK/lO1+oVl0R/rVYQew6Gr5BAKP1EHsmT2NUPPw==",
   "success": true,
-  "projectFilePath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.BL\\ImageContent.BL.csproj",
+  "projectFilePath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.BL\\ImageContent.BL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\M.C.C\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\M.C.C\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.15\\microsoft.entityframeworkcore.8.0.15.nupkg.sha512",

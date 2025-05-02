@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ImageContent.Common
-build_property.ProjectDir = D:\Clean Architecture Project\ImageContent\ImageContent.Common\
+build_property.ProjectDir = D:\Clean Architecture Projects\ImageContent\ImageContent.Common\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

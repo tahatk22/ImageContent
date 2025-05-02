@@ -2262,11 +2262,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj",
+      "projectUniqueName": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj",
       "projectName": "ImageContent.Infrastracture",
-      "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj",
+      "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj",
       "packagesPath": "C:\\Users\\M.C.C\\.nuget\\packages\\",
-      "outputPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\obj\\",
+      "outputPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\M.C.C\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2283,8 +2283,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj": {
-              "projectPath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj"
+            "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj": {
+              "projectPath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Domain\\ImageContent.Domain.csproj"
             }
           }
         }

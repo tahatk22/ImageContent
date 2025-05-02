@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Er4wCXkgbGi7jqon73eG7iq5HkmIa81pxP72N6rKt0QLLyYlvPH9Xnrp5ORXC1jxLa0FdiyU3jTXj1yHKW6GLA==",
+  "dgSpecHash": "/s1f2jv3U0CBGMbKUSDDZ4gigbukCm5uIU6Tv/fSoC06QIswWa4qBac/qGa9GElQTZ7uuodQ2K4gfxNklXjjUQ==",
   "success": true,
-  "projectFilePath": "D:\\Clean Architecture Project\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj",
+  "projectFilePath": "D:\\Clean Architecture Projects\\ImageContent\\ImageContent.Infrastracture\\ImageContent.Infrastracture.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\M.C.C\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\M.C.C\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
