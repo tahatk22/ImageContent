@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ImageContent.BL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffe026cc07d7b75d00ad189e0e156dbcb1896ae4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05f68a2585c445d8903a73333943f1aea104afb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("ImageContent.BL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ImageContent.BL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
