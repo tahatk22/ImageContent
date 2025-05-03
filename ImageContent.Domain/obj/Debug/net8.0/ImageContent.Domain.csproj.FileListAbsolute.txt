@@ -14,3 +14,16 @@ D:\Clean Architecture Project\ImageContent\ImageContent.Domain\bin\Debug\net8.0\
 D:\Clean Architecture Project\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.csproj.AssemblyReference.cache
 D:\Clean Architecture Project\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageCon.10C63E30.Up2Date
 D:\Clean Architecture Project\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.sourcelink.json
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.csproj.AssemblyReference.cache
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.AssemblyInfoInputs.cache
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.AssemblyInfo.cs
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.csproj.CoreCompileInputs.cache
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.sourcelink.json
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\bin\Debug\net8.0\ImageContent.Domain.deps.json
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\bin\Debug\net8.0\ImageContent.Domain.dll
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\bin\Debug\net8.0\ImageContent.Domain.pdb
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.dll
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\refint\ImageContent.Domain.dll
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ImageContent.Domain.pdb
+D:\Clean Architecture Projects\ImageContent\ImageContent.Domain\obj\Debug\net8.0\ref\ImageContent.Domain.dll

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ImageContent.BL.IService
+namespace ImageContent.Common.Interfaces.IService
 {
     public interface IDescriptiveImageService
     {

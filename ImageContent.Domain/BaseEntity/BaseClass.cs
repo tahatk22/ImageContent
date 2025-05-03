@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ImageContent.Common.BaseEntity
+namespace ImageContent.Domain.BaseEntity
 {
     public abstract class BaseClass
     {

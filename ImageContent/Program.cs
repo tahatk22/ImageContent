@@ -3,6 +3,10 @@ using ImageContent.Infrastracture.Database;
 using Microsoft.EntityFrameworkCore;
 using ImageContent.DAL.RepoInjection;
 using ImageContent.BL.ConfigureService;
+using ImageContent.Domain.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using ImageContent.Common.Mapping;
 
 namespace ImageContent
 {
@@ -24,6 +28,16 @@ namespace ImageContent
             builder.Services.ConfigureRepos();
             builder.Services.ConfigureServices();
 
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<AppDbContext>()
+              .AddDefaultTokenProviders();
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
             // Your Pipeline
             var app = builder.Build();
@@ -34,6 +48,7 @@ namespace ImageContent
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

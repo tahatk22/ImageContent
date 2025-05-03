@@ -1,4 +1,4 @@
-﻿using ImageContent.Common.Interfaces;
+﻿using ImageContent.Common.Interfaces.IRepository;
 using ImageContent.DAL.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using System;

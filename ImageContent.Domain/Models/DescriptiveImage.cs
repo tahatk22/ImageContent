@@ -1,4 +1,4 @@
-﻿using ImageContent.Common.BaseEntity;
+﻿using ImageContent.Domain.BaseEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

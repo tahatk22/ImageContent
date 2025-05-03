@@ -1,8 +1,8 @@
-﻿using ImageContent.BL.IService;
+﻿using ImageContent.Common.Interfaces.IService;
 using ImageContent.Common.BaseResponse;
 using ImageContent.Common.DTOs;
 using ImageContent.Common.FileHelper;
-using ImageContent.Common.Interfaces;
+using ImageContent.Common.Interfaces.IRepository;
 using ImageContent.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using System;

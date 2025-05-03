@@ -1,4 +1,4 @@
-﻿using ImageContent.BL.IService;
+﻿using ImageContent.Common.Interfaces.IService;
 using ImageContent.Common.BaseResponse;
 using ImageContent.Common.DTOs;
 using ImageContent.Domain.Models;

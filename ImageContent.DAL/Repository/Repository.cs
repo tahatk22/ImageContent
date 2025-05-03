@@ -1,4 +1,5 @@
-﻿using ImageContent.Common.Interfaces;
+﻿using ImageContent.Common.Interfaces.IRepository;
+using ImageContent.Domain.Models;
 using ImageContent.Infrastracture.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,7 +31,7 @@ namespace ImageContent.DAL.Repository
             Set.Remove(obj);
         }
 
-        public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter, string? props = null)
+        public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? props = null)
         {
             IQueryable<T> Data = Set;
             if (filter is not null)

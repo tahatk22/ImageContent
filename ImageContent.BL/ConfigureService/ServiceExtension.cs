@@ -1,4 +1,4 @@
-﻿using ImageContent.BL.IService;
+﻿using ImageContent.Common.Interfaces.IService;
 using ImageContent.BL.Service;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +14,7 @@ namespace ImageContent.BL.ConfigureService
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddHttpClient<IDescriptiveImageService, DescriptiveImageService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }

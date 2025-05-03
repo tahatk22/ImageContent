@@ -12,5 +12,6 @@ namespace ImageContent.Common.BaseResponse
         public string Message { get; set; }
         public string Error { get; set; }
         public T Data { get; set; }
+        public int Count { get; set; }
     }
 }
