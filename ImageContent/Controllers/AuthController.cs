@@ -37,5 +37,15 @@ namespace ImageContent.Controllers
             }
             return Ok(getUsers);
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var loginUser = await authService.LoginAsync(loginDto);
+            if (!loginUser.Success)
+            {
+                return BadRequest(loginUser.Error);
+            }
+            return Ok(loginUser);
+        }
     }
 }

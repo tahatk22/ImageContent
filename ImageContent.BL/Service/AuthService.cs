@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ImageContent.BL.Service
 {
@@ -40,15 +41,10 @@ namespace ImageContent.BL.Service
         public async Task<BaseCommandResponse<List<UserDto>>> GetAllUsersAsync(Expression<Func<ApplicationUser, bool>>? filter = null, string? props = null)
         {
             var response = new BaseCommandResponse<List<UserDto>>();
-            List<UserDto> users = new List<UserDto>();
             var applicationUsers =  await applicationUser.GetAll(filter, props);
             if (applicationUsers.Any())
             {
-                foreach (var User in applicationUsers)
-                {
-                    var userDto = mapper.Map<UserDto>(User);
-                    users.Add(userDto);
-                }
+                var users = mapper.Map<List<UserDto>>(applicationUsers);
                 response.Data = users;
                 response.Count = users.Count;
                 return response;
@@ -65,9 +61,28 @@ namespace ImageContent.BL.Service
             throw new NotImplementedException();
         }
 
-        public Task<BaseCommandResponse<ApplicationUser>> LoginAsync(LoginDto loginDto)
+        public async Task<BaseCommandResponse<UserDto>> LoginAsync(LoginDto loginDto)
         {
-            throw new NotImplementedException();
+            var response = new BaseCommandResponse<UserDto>();
+            var user = await userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
+            if (user is null)
+            {
+                response.Error = "There Is No User With This Name";
+                return response;
+            }
+            var result = await signInManager.PasswordSignInAsync(user, loginDto.Password, false, false);
+            if (result.Succeeded)
+            {
+                var userDto = mapper.Map<UserDto>(user);
+                response.Message = $"User {loginDto.UserName} Loged In Successfuly";
+                response.Data = userDto;
+                return response;
+            }
+            else
+            {
+                response.Error = "Username Or Password Is Incorrect";
+                return response;
+            }
         }
 
         public async Task<BaseCommandResponse<UserDto>> RegisterAsync(AddUserDto userDto)

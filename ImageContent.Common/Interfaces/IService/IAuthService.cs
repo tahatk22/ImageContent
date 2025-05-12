@@ -16,7 +16,7 @@ namespace ImageContent.Common.Interfaces.IService
         Task<BaseCommandResponse<List<UserDto>>> GetAllUsersAsync(Expression<Func<ApplicationUser, bool>>? filter = null, string? props = null);
         Task<BaseCommandResponse<ApplicationUser>> GetUserAsync(Expression<Func<ApplicationUser, bool>> filter, string? props = null);
         Task<BaseCommandResponse<UserDto>> RegisterAsync(AddUserDto userDto);
-        Task<BaseCommandResponse<ApplicationUser>> LoginAsync(LoginDto loginDto);
+        Task<BaseCommandResponse<UserDto>> LoginAsync(LoginDto loginDto);
         Task<BaseCommandResponse<ApplicationUser>> Delete(ApplicationUser user);
         Task<BaseCommandResponse<ApplicationUser>> Update(ApplicationUser user);
     }
