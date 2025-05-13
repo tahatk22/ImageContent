@@ -1,5 +1,7 @@
 ﻿using ImageContent.Common.DTOs;
 using ImageContent.Common.Interfaces.IService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,12 @@ namespace ImageContent.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService authService;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService , IHttpContextAccessor httpContextAccessor)
         {
             this.authService = authService;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("add-user")]
@@ -27,6 +31,7 @@ namespace ImageContent.Controllers
             return Ok(createUser);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "User")]
         [HttpGet("get-all-users")]
         public async Task<IActionResult> GetAll()
         {
@@ -37,6 +42,7 @@ namespace ImageContent.Controllers
             }
             return Ok(getUsers);
         }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
@@ -46,6 +52,18 @@ namespace ImageContent.Controllers
                 return BadRequest(loginUser.Error);
             }
             return Ok(loginUser);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var logoutUser = await authService.Logout();
+            if (!logoutUser.Success)
+            {
+                return BadRequest(logoutUser.Error);
+            }
+            return Ok(logoutUser);
         }
     }
 }

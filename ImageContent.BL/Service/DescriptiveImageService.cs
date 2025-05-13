@@ -15,6 +15,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using System.Security.Claims;
 
 namespace ImageContent.BL.Service
 {
@@ -22,11 +23,13 @@ namespace ImageContent.BL.Service
     {
         private readonly IRepository<DescriptiveImage> repository;
         private readonly HttpClient httpClient;
+        private readonly IHttpContextAccessor contextAccessor;
 
-        public DescriptiveImageService(IRepository<DescriptiveImage> repository , HttpClient httpClient)
+        public DescriptiveImageService(IRepository<DescriptiveImage> repository , HttpClient httpClient , IHttpContextAccessor contextAccessor)
         {
             this.repository = repository;
             this.httpClient = httpClient;
+            this.contextAccessor = contextAccessor;
         }
         public async Task<BaseCommandResponse<DescriptiveImage>> AddAsync(IFormFile image)
         {
@@ -53,9 +56,11 @@ namespace ImageContent.BL.Service
 
                 var captionResponse = await GenerateCaptionAsync(image);
 
+                var userId = contextAccessor.HttpContext.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+
                 var DescriptiveImage = new DescriptiveImage()
                 {
-                    CreatedUser = string.Empty,
+                    CreatedUser = userId ?? string.Empty,
                     ImageURL = ImageURL,
                     Image = imageBytes,
                     ImageContent = imageToBase64,

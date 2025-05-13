@@ -11,6 +11,11 @@ using ImageContent.Common.SeedingHelper;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
+using ImageContent.Common.Interfaces.IService;
+using ImageContent.Extensions;
 
 namespace ImageContent
 {
@@ -22,6 +27,8 @@ namespace ImageContent
 
             // Add Services
             builder.Services.AddControllers();
+
+            // Add CORS policy
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAllOrigins",
@@ -33,25 +40,34 @@ namespace ImageContent
                     });
             });
 
+            // Add JWT Authentication
+            builder.Services.AddJwtBearerAuthentication( 
+                builder.Configuration["Jwt:Issuer"],
+                builder.Configuration["Jwt:Audience"],
+                builder.Configuration["Jwt:Key"]);
+
+
+            // Add HttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
+
+            // Add Seed Service
             builder.Services.AddScoped<IdentitySeeder>();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Add Database Context
             builder.Services.AddDbContext<AppDbContext>(op => 
             op.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            // Add Repositories and Services
             builder.Services.ConfigureRepos();
             builder.Services.ConfigureServices();
 
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-            }).AddEntityFrameworkStores<AppDbContext>()
-              .AddDefaultTokenProviders();
+            // Add Identity
+            builder.Services.AddIdentity();
 
+            // Add AutoMapper
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
@@ -66,6 +82,7 @@ namespace ImageContent
 
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.MapControllers();
 

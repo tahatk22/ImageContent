@@ -12,6 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace ImageContent.BL.Service
 {
@@ -22,16 +27,23 @@ namespace ImageContent.BL.Service
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly ITokenBlackListService tokenBlackListService;
 
         public AuthService(IRepository<ApplicationUser> applicationUser , UserManager<ApplicationUser> userManager , 
             RoleManager<IdentityRole> roleManager , SignInManager<ApplicationUser> signInManager,
-            IMapper mapper)
+            IMapper mapper , IConfiguration configuration , IHttpContextAccessor httpContextAccessor
+            ,ITokenBlackListService tokenBlackListService)
         {
             this.applicationUser = applicationUser;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.signInManager = signInManager;
             this.mapper = mapper;
+            this.configuration = configuration;
+            this.httpContextAccessor = httpContextAccessor;
+            this.tokenBlackListService = tokenBlackListService;
         }
         public Task<BaseCommandResponse<ApplicationUser>> Delete(ApplicationUser user)
         {
@@ -61,9 +73,9 @@ namespace ImageContent.BL.Service
             throw new NotImplementedException();
         }
 
-        public async Task<BaseCommandResponse<UserDto>> LoginAsync(LoginDto loginDto)
+        public async Task<BaseCommandResponse<ResponseAuth>> LoginAsync(LoginDto loginDto)
         {
-            var response = new BaseCommandResponse<UserDto>();
+            var response = new BaseCommandResponse<ResponseAuth>();
             var user = await userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
             if (user is null)
             {
@@ -73,14 +85,42 @@ namespace ImageContent.BL.Service
             var result = await signInManager.PasswordSignInAsync(user, loginDto.Password, false, false);
             if (result.Succeeded)
             {
+                var jwtSecurityToken = await GenerateToken(user);
+                var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+                tokenBlackListService.StoreUserTokens(user.Id, token);
+                tokenBlackListService.BlackListPreviousToken(user.Id, token);
                 var userDto = mapper.Map<UserDto>(user);
+                var responseAuth = new ResponseAuth
+                {
+                    Token = token,
+                    User = userDto
+                };
                 response.Message = $"User {loginDto.UserName} Loged In Successfuly";
-                response.Data = userDto;
+                response.Data = responseAuth;
                 return response;
             }
             else
             {
                 response.Error = "Username Or Password Is Incorrect";
+                return response;
+            }
+        }
+
+        public async Task<BaseCommandResponse<UserDto>> Logout()
+        {
+            var response = new BaseCommandResponse<UserDto>();
+            try
+            {
+                var token = httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+                var user = await userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+                await signInManager.SignOutAsync();
+                tokenBlackListService.BlacklistToken(token);
+                response.Message = $"User {user?.FirstName} Logged Out Successfuly";
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = ex.Message;
                 return response;
             }
         }
@@ -116,6 +156,36 @@ namespace ImageContent.BL.Service
         public Task<BaseCommandResponse<ApplicationUser>> Update(ApplicationUser user)
         {
             throw new NotImplementedException();
+        }
+
+        private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
+        {
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var roles = await userManager.GetRolesAsync(user);
+            string userRoles = string.Join(",", roles);
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim("UserID", user.Id.ToString()),
+                new Claim("role", userRoles)
+        }
+            .Union(userClaims);
+
+
+            var Key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("Jwt:Key").Value));
+            var signingCredentials = new SigningCredentials(Key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: configuration.GetSection("Jwt:Issuer").Value,
+                audience: configuration.GetSection("Jwt:Audience").Value,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(configuration.GetSection("Jwt:ExpireTime").Value)),
+                signingCredentials: signingCredentials);
+
+            return token;
         }
     }
 }

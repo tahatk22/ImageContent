@@ -15,6 +15,7 @@ namespace ImageContent.BL.ConfigureService
         {
             services.AddHttpClient<IDescriptiveImageService, DescriptiveImageService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<ITokenBlackListService, TokenBlackListService>();
         }
     }
 }

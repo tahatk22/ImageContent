@@ -11,7 +11,7 @@ namespace ImageContent.Common.BaseResponse
         public bool Success => string.IsNullOrWhiteSpace(Error);
         public string Message { get; set; }
         public string Error { get; set; }
-        public T Data { get; set; }
+        public T? Data { get; set; }
         public int Count { get; set; }
     }
 }
