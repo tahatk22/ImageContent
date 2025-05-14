@@ -26,6 +26,14 @@ namespace ImageContent.Infrastracture.Database
                     c => Ulid.Parse(c)
                 ).HasColumnType("text");
 
+            modelBuilder.Entity<RefreshToken>()
+                .Property(x => x.Id)
+                .HasConversion
+                (
+                    c => c.ToString(),
+                    c => Ulid.Parse(c)
+                ).HasColumnType("text");
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -14,6 +14,7 @@ namespace ImageContent.Common.Interfaces.IRepository
         Task Add(T obj);
         void Update(T obj);
         void Delete(T obj);
+        void DeleteRange(IEnumerable<T> objs);
         Task Save();
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ImageContent.DAL.Repository
 {
@@ -31,6 +32,11 @@ namespace ImageContent.DAL.Repository
             Set.Remove(obj);
         }
 
+        public void DeleteRange(IEnumerable<T> objs)
+        {
+            Set.RemoveRange(objs);
+        }
+
         public async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>>? filter = null, string? props = null)
         {
             IQueryable<T> Data = Set;
@@ -40,9 +46,9 @@ namespace ImageContent.DAL.Repository
             }
             if (props is not null)
             {
-                foreach (var item in props.Split(','))
+                foreach (var item in props.Split(',' , StringSplitOptions.RemoveEmptyEntries))
                 {
-                    Data.Include(item);
+                    Data.Include(item.Trim());
                 }
             }
             return await Data.ToListAsync();
@@ -51,11 +57,11 @@ namespace ImageContent.DAL.Repository
         public async Task<T> GetOne(Expression<Func<T, bool>> filter, string? props = null)
         {
             var Data = Set.Where(filter);
-            if (props is not null)
+            if (!string.IsNullOrWhiteSpace(props))
             {
-                foreach (var item in props.Split(','))
+                foreach (var item in props.Split(',', StringSplitOptions.RemoveEmptyEntries))
                 {
-                    Data.Include(item);
+                    Data = Data.Include(item.Trim());
                 }
             }
             return await Data.FirstOrDefaultAsync();

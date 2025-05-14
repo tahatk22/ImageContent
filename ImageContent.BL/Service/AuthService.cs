@@ -17,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
 
 namespace ImageContent.BL.Service
 {
@@ -30,11 +31,12 @@ namespace ImageContent.BL.Service
         private readonly IConfiguration configuration;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly ITokenBlackListService tokenBlackListService;
+        private readonly IRepository<RefreshToken> refreshTokenRepo;
 
         public AuthService(IRepository<ApplicationUser> applicationUser , UserManager<ApplicationUser> userManager , 
             RoleManager<IdentityRole> roleManager , SignInManager<ApplicationUser> signInManager,
             IMapper mapper , IConfiguration configuration , IHttpContextAccessor httpContextAccessor
-            ,ITokenBlackListService tokenBlackListService)
+            ,ITokenBlackListService tokenBlackListService , IRepository<RefreshToken> refreshTokenRepo)
         {
             this.applicationUser = applicationUser;
             this.userManager = userManager;
@@ -44,10 +46,39 @@ namespace ImageContent.BL.Service
             this.configuration = configuration;
             this.httpContextAccessor = httpContextAccessor;
             this.tokenBlackListService = tokenBlackListService;
+            this.refreshTokenRepo = refreshTokenRepo;
         }
         public Task<BaseCommandResponse<ApplicationUser>> Delete(ApplicationUser user)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<BaseCommandResponse<string>> GenerateRefreshToken()
+        {
+            var response = new BaseCommandResponse<string>();
+            try
+            {
+                var userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var rng = RandomNumberGenerator.Create();
+                var byteArray = new byte[64];
+                rng.GetBytes(byteArray);
+                var refreshToken = Convert.ToBase64String(byteArray);
+                await refreshTokenRepo.Add(new RefreshToken
+                {
+                    Token = refreshToken,
+                    Expires = DateTime.UtcNow.AddDays(Convert.ToInt32(configuration.GetSection("JWT:RefreshTokenExpirationDays").Value)),
+                    UserId = userId ?? string.Empty,
+                    CreatedUser = userId ?? string.Empty
+                });
+                await refreshTokenRepo.Save();
+                response.Data = refreshToken;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = ex.Message;
+                return response;
+            }
         }
 
         public async Task<BaseCommandResponse<List<UserDto>>> GetAllUsersAsync(Expression<Func<ApplicationUser, bool>>? filter = null, string? props = null)
@@ -73,9 +104,9 @@ namespace ImageContent.BL.Service
             throw new NotImplementedException();
         }
 
-        public async Task<BaseCommandResponse<ResponseAuth>> LoginAsync(LoginDto loginDto)
+        public async Task<BaseCommandResponse<LoginResponse>> LoginAsync(LoginDto loginDto)
         {
-            var response = new BaseCommandResponse<ResponseAuth>();
+            var response = new BaseCommandResponse<LoginResponse>();
             var user = await userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.UserName);
             if (user is null)
             {
@@ -86,13 +117,15 @@ namespace ImageContent.BL.Service
             if (result.Succeeded)
             {
                 var jwtSecurityToken = await GenerateToken(user);
+                var refreshToken = await GenerateRefreshToken();
                 var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
                 tokenBlackListService.StoreUserTokens(user.Id, token);
                 tokenBlackListService.BlackListPreviousToken(user.Id, token);
                 var userDto = mapper.Map<UserDto>(user);
-                var responseAuth = new ResponseAuth
+                var responseAuth = new LoginResponse
                 {
-                    Token = token,
+                    accessToken = token,
+                    refreshToken = refreshToken.Data,
                     User = userDto
                 };
                 response.Message = $"User {loginDto.UserName} Loged In Successfuly";
@@ -112,9 +145,13 @@ namespace ImageContent.BL.Service
             try
             {
                 var token = httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-                var user = await userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+                var userId = httpContextAccessor.HttpContext.User.FindFirst("UserID")?.Value;
+                var user = await applicationUser.GetOne(x => x.Id == userId);
                 await signInManager.SignOutAsync();
                 tokenBlackListService.BlacklistToken(token);
+                var refreshTokens = await refreshTokenRepo.GetAll(x => x.UserId == user.Id);
+                refreshTokenRepo.DeleteRange(refreshTokens);
+                await refreshTokenRepo.Save();
                 response.Message = $"User {user?.FirstName} Logged Out Successfuly";
                 return response;
             }
@@ -151,6 +188,36 @@ namespace ImageContent.BL.Service
                 return response;
             }
             
+        }
+
+        public async Task<BaseCommandResponse<AuthResponse>> RevokeRefreshToken(string refreshToken)
+        {
+            var response = new BaseCommandResponse<AuthResponse>();
+            try
+            {
+                var refreshTokenFromDb = await refreshTokenRepo.GetOne(x => x.Token == refreshToken , "User");
+                if (refreshTokenFromDb is null || !refreshTokenFromDb.IsActive || refreshTokenFromDb.IsExpired)
+                {
+                    response.Error = "This Token Is Not Active";
+                    return response;
+                }
+                refreshTokenFromDb.Revoked = DateTime.UtcNow;
+                var accessToken = await GenerateToken(refreshTokenFromDb.User);
+                var newRefreshToken = await GenerateRefreshToken();
+                await refreshTokenRepo.Save();
+                var authResponse = new AuthResponse
+                {
+                    accessToken = new JwtSecurityTokenHandler().WriteToken(accessToken),
+                    refreshToken = newRefreshToken.Data
+                };
+                response.Data = authResponse;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Error = ex.Message;
+                return response;
+            }
         }
 
         public Task<BaseCommandResponse<ApplicationUser>> Update(ApplicationUser user)

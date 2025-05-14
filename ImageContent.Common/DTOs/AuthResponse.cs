@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ImageContent.Common.DTOs
 {
-    public class ResponseAuth
+    public class AuthResponse
     {
-        public UserDto User { get; set; }
-        public string Token { get; set; }
+        public string accessToken { get; set; }
+        public string refreshToken { get; set; }
     }
 }

@@ -65,5 +65,16 @@ namespace ImageContent.Controllers
             }
             return Ok(logoutUser);
         }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> refresh([FromBody] string refreshToken)
+        {
+            var refresh = await authService.RevokeRefreshToken(refreshToken);
+            if (!refresh.Success)
+            {
+                return Unauthorized(refresh.Error);
+            }
+            return Ok(refresh);
+        }
     }
 }
