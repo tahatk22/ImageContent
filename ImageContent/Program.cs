@@ -16,6 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using ImageContent.Common.Interfaces.IService;
 using ImageContent.Extensions;
+using Serilog;
+using ImageContent.Common.Middleware;
 
 namespace ImageContent
 {
@@ -38,6 +40,16 @@ namespace ImageContent
                                .AllowAnyMethod()
                                .AllowAnyHeader();
                     });
+            });
+
+
+            // Add Serilog
+            builder.Host.UseSerilog((context, services, configuration) =>
+            {
+                configuration
+                    .ReadFrom.Configuration(context.Configuration)
+                    .ReadFrom.Services(services)
+                    .Enrich.FromLogContext();
             });
 
             // Add JWT Authentication
@@ -92,6 +104,17 @@ namespace ImageContent
                 await seeder.SeedRoles();
             }
 
+            app.UseSerilogRequestLogging(options =>
+            {
+                options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                {
+                    diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
+                    diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+                    diagnosticContext.Set("UserAgent", httpContext.Request.Headers["User-Agent"].ToString());
+                };
+            });
+
+            app.UseMiddleware<RequestLoggingMiddleWare>();
             app.Run();
         }
     }

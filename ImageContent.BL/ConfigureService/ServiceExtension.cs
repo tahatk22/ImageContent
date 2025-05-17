@@ -13,9 +13,10 @@ namespace ImageContent.BL.ConfigureService
     {
         public static void ConfigureServices(this IServiceCollection services)
         {
-            services.AddHttpClient<IDescriptiveImageService, DescriptiveImageService>();
+            services.AddScoped<IDescriptiveImageService, DescriptiveImageService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddSingleton<ITokenBlackListService, TokenBlackListService>();
+            services.AddHttpClient();
         }
     }
 }

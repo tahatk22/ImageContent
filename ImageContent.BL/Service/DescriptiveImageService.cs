@@ -22,10 +22,10 @@ namespace ImageContent.BL.Service
     public class DescriptiveImageService : IDescriptiveImageService
     {
         private readonly IRepository<DescriptiveImage> repository;
-        private readonly HttpClient httpClient;
+        private readonly IHttpClientFactory httpClient;
         private readonly IHttpContextAccessor contextAccessor;
 
-        public DescriptiveImageService(IRepository<DescriptiveImage> repository , HttpClient httpClient , IHttpContextAccessor contextAccessor)
+        public DescriptiveImageService(IRepository<DescriptiveImage> repository , IHttpClientFactory httpClient , IHttpContextAccessor contextAccessor)
         {
             this.repository = repository;
             this.httpClient = httpClient;
@@ -160,7 +160,8 @@ namespace ImageContent.BL.Service
             var imageContent = new StreamContent(ms);
             content.Add(imageContent, "file", image.FileName);
 
-            var response = await httpClient.PostAsync("https://bambii-03-art-vision-art-description-generator.hf.space/generate_caption", content);
+            var createHttpClient = httpClient.CreateClient();
+            var response = await createHttpClient.PostAsync("https://bambii-03-art-vision-art-description-generator.hf.space/generate_caption", content);
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();

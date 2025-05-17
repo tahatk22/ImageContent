@@ -18,6 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
+using Microsoft.Extensions.Logging;
 
 namespace ImageContent.BL.Service
 {
@@ -32,11 +33,12 @@ namespace ImageContent.BL.Service
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly ITokenBlackListService tokenBlackListService;
         private readonly IRepository<RefreshToken> refreshTokenRepo;
+        private readonly ILogger logger;
 
         public AuthService(IRepository<ApplicationUser> applicationUser , UserManager<ApplicationUser> userManager , 
             RoleManager<IdentityRole> roleManager , SignInManager<ApplicationUser> signInManager,
             IMapper mapper , IConfiguration configuration , IHttpContextAccessor httpContextAccessor
-            ,ITokenBlackListService tokenBlackListService , IRepository<RefreshToken> refreshTokenRepo)
+            ,ITokenBlackListService tokenBlackListService , IRepository<RefreshToken> refreshTokenRepo , ILogger<AuthService> logger)
         {
             this.applicationUser = applicationUser;
             this.userManager = userManager;
@@ -47,6 +49,7 @@ namespace ImageContent.BL.Service
             this.httpContextAccessor = httpContextAccessor;
             this.tokenBlackListService = tokenBlackListService;
             this.refreshTokenRepo = refreshTokenRepo;
+            this.logger = logger;
         }
         public Task<BaseCommandResponse<ApplicationUser>> Delete(ApplicationUser user)
         {
@@ -83,6 +86,7 @@ namespace ImageContent.BL.Service
 
         public async Task<BaseCommandResponse<List<UserDto>>> GetAllUsersAsync(Expression<Func<ApplicationUser, bool>>? filter = null, string? props = null)
         {
+            logger.LogInformation("Get All Users");
             var response = new BaseCommandResponse<List<UserDto>>();
             var applicationUsers =  await applicationUser.GetAll(filter, props);
             if (applicationUsers.Any())
@@ -90,10 +94,12 @@ namespace ImageContent.BL.Service
                 var users = mapper.Map<List<UserDto>>(applicationUsers);
                 response.Data = users;
                 response.Count = users.Count;
+                logger.LogInformation("Get All Users Successfuly");
                 return response;
             }
             else
             {
+                logger.LogInformation("There Is No Users");
                 response.Error = "There is No Users";
                 return response;
             }

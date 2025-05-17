@@ -1,0 +1,21 @@
+[2025-05-17 18:30:37.693 +03:00 INF] HTTP POST /api/DescriptiveImage/AddImage responded 400 in 102643.2112 ms 
+[2025-05-17 18:39:41.733 +03:00 INF] HTTP GET /api/Auth/login responded 405 in 1.0330 ms 
+[2025-05-17 18:40:22.298 +03:00 INF] HTTP POST /api/Auth/login responded 400 in 496.5354 ms 
+[2025-05-17 18:40:38.872 +03:00 INF] HTTP POST /api/Auth/login responded 200 in 794.4777 ms 
+[2025-05-17 18:41:05.109 +03:00 INF] Get All Users 
+[2025-05-17 18:41:05.154 +03:00 INF] Get All Users Successfuly 
+[2025-05-17 18:41:05.165 +03:00 INF] HTTP GET /api/Auth/get-all-users responded 200 in 71.3093 ms 
+[2025-05-17 18:54:43.814 +03:00 INF] Incoming request: POST /api/Auth/refresh "GOPt+SD3RAqMK62VgTgKHr6updJSoS36HYD5Devhacpc1tZeo4O6oScg6IETY2os51/H/T7fU1AzaekWfp6MMg==" 
+[2025-05-17 18:54:48.123 +03:00 INF] Response: 200 {"success":true,"message":null,"error":null,"data":{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwianRpIjoiZWY1ZmQzMmYtY2RmNS00MWQ2LWE3MjgtYmNlNzgyZWJhMzllIiwiZW1haWwiOiJ1c2VyQG1haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI3YjhjMWRmYS1hMWI4LTQ1ODUtODk4Zi1hNWNjZTRlZDVlNmEiLCJVc2VySUQiOiI3YjhjMWRmYS1hMWI4LTQ1ODUtODk4Zi1hNWNjZTRlZDVlNmEiLCJyb2xlIjoiVXNlciIsImV4cCI6MTc0NzQ5NzM0NywiaXNzIjoiSW1hZ2VDb250ZW50IiwiYXVkIjoiSW1hZ2VDb250ZW50VXNlcnMifQ.tbAqWv8G-XoUb_dzKDvVjwQP4OF5bXvuvfjrNpDq9J8","refreshToken":"pL6JDvMUJt8zODT4oF6qSgZPSiVaaED+2BwvK1LMFR/4oRAMS1U5KA/dXM/Hri31hZgWKkxAX1Purq+QBbZLLw=="},"count":0} 
+[2025-05-17 18:54:48.137 +03:00 INF] HTTP POST /api/Auth/refresh responded 200 in 4331.6195 ms 
+[2025-05-17 18:55:01.092 +03:00 INF] Incoming request: GET /api/Auth/get-all-users  
+[2025-05-17 18:55:01.116 +03:00 INF] Get All Users 
+[2025-05-17 18:55:01.158 +03:00 INF] Get All Users Successfuly 
+[2025-05-17 18:55:01.168 +03:00 INF] Response: 200 {"success":true,"message":null,"error":null,"data":[{"firstName":"Admin","lastName":"Admin","email":"admin@mail.com","userName":"admin"},{"firstName":"user","lastName":"user","email":"user@mail.com","userName":"user"}],"count":2} 
+[2025-05-17 18:55:01.174 +03:00 INF] HTTP GET /api/Auth/get-all-users responded 200 in 82.5708 ms 
+[2025-05-17 18:55:36.621 +03:00 INF] Incoming request: POST /api/Auth/login {
+    "userName" : "user",
+    "password" : "User@123#"
+} 
+[2025-05-17 18:55:36.903 +03:00 INF] Response: 200 {"success":true,"message":"User user Loged In Successfuly","error":null,"data":{"user":{"firstName":"user","lastName":"user","email":"user@mail.com","userName":"user"},"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwianRpIjoiMGM5NjM3NDQtZmMyOC00M2Q4LTk5MWUtMzQ4NjRiZTkzZTk3IiwiZW1haWwiOiJ1c2VyQG1haWwuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiI3YjhjMWRmYS1hMWI4LTQ1ODUtODk4Zi1hNWNjZTRlZDVlNmEiLCJVc2VySUQiOiI3YjhjMWRmYS1hMWI4LTQ1ODUtODk4Zi1hNWNjZTRlZDVlNmEiLCJyb2xlIjoiVXNlciIsImV4cCI6MTc0NzQ5NzM5NiwiaXNzIjoiSW1hZ2VDb250ZW50IiwiYXVkIjoiSW1hZ2VDb250ZW50VXNlcnMifQ.IzYkWx-CLDTBS93RP9FKlv2s4UP2-tVIHjpbFwJRZ3c","refreshToken":"DPBZk0b39GYsPaJepkbZNfXL1dVHkpy0kGNO3X615efbf/L/UkF9BmbeTyF2YAFIh7Y473XfnfJQ5y+BQ3427w=="},"count":0} 
+[2025-05-17 18:55:36.909 +03:00 INF] HTTP POST /api/Auth/login responded 200 in 288.2676 ms 
