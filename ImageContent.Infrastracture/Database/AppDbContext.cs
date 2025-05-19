@@ -16,6 +16,7 @@ namespace ImageContent.Infrastracture.Database
                 
         }
         public DbSet<DescriptiveImage> descriptiveImages { get; set; }
+        public DbSet<RefreshToken> RefreshToken { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DescriptiveImage>()
